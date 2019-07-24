@@ -8,7 +8,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/ruby:2.6.1-node-browsers
-
+      - image: circleci/mysql:5.7
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -18,7 +18,9 @@ jobs:
 
     steps:
       - checkout
-
+      - run:
+        name: Wait for DB
+        command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
       # Download and cache dependencies
       - restore_cache:
           keys:
