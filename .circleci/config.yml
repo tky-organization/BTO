@@ -26,6 +26,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
+      - run: gem update bundler
       - run:
           name: install dependencies
           command: |
@@ -36,8 +37,6 @@ jobs:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-      # make dummy master.key
-      - run: echo 'DUMMY' > config/master.key
       # Database setup
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
