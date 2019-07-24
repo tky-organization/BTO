@@ -1,0 +1,8 @@
+  .col-sm-2.sideposition.sidenav.bg-light
+    p 
+      h2.text-secondary メニュー
+      - @menu.each do |men|
+        = link_to men.display_link, men.url, method: :get
+
+  .col-sm-10
+    

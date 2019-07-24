@@ -1,0 +1,12 @@
+nav.navbar.bg-dark.navbar-dark
+  a.navbar-brand[href="/"] 
+    = ApplicationHelper::APP_NAME
+  - if user_signed_in?
+    ul.nav.justify-content-end
+      li.nav-item
+        = link_to edit_user_registration_path, class: 'nav-link text-primary' do
+          | プロフィール編集
+          span
+      li.nav-item
+        = link_to destroy_user_session_path, method: :delete, class: 'nav-link text-primary' do
+          | ログアウト

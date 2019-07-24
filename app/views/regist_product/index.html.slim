@@ -1,0 +1,53 @@
+.col-sm-12
+  - if flash[:errmsg]
+    - flash[:errmsg].each do |k,v| 
+      .alert.alert-danger
+        = k.to_s + ' ' + v.to_s
+  h1.text-primary 商品登録
+  = form_with model: @new_order, local: true do |f|
+    .row
+      .col-md-5
+        = f.label :title, "URL"
+        = f.text_field :url, class: "form-control col-md-12 col-sm"
+        = f.label :title, "商品名"
+        = f.text_field :product_name, class: "form-control col-md-12 col-sm"
+        = f.label :title, "色"
+        = f.text_field :color, class: "form-control col-md-12 col-sm"
+        = f.label :title, "適合"
+        = f.text_field :fit, class: "form-control col-md-12 col-sm"
+      .col-md-5
+        = f.label :title, "数量"
+        = f.text_field :quantity, class: "form-control col-md-12 col-sm"
+        = f.label :title, "金額"
+        = f.text_field :price, class: "form-control col-md-12 col-sm"
+        = f.label :title, "その他"
+        = f.text_field :other, class: "form-control col-md-12 col-sm"
+        br
+        = f.submit "登録", class: "btn btn-light"
+    br
+  = form_with method: :delete, url: delete_order_path, local: true do |f|
+    = f.submit "削除", class: "btn btn-light"
+    table.table.table-striped
+      thread
+        tr
+          th URL
+          th 商品名
+          th 色
+          th 適合
+          th 数量
+          th 金額
+          th その他
+          th 取消
+        tr
+      tbody
+        - if !@order_products.nil?
+          - @order_products.each do |prod| 
+            tr
+              td = link_to prod.url, prod.url, target: :_blank
+              td = prod.product_name
+              td = prod.color
+              td = prod.fit
+              td = prod.quantity
+              td = prod.price
+              td = prod.other
+              td = f.check_box prod.id, checked_value: "1", unchecked_value: "0"
