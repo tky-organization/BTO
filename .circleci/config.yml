@@ -36,6 +36,8 @@ jobs:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
+      # make dummy master.key
+      - run: echo 'DUMMY' > config/master.key
       # Database setup
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
