@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/ruby:2.6.1-node-browsers
+      # - image: circleci/ruby:2.6.1-node-browsers
       - image: circleci/mysql:5.7
         command: |
           mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
